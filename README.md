@@ -36,12 +36,13 @@ hgvs2vcf/
 
 ## Requirements
 
-The workflow requires R and the `httr2` package.
+The workflow requires R and the `httr2` and `jsonlite` packages.
 
 Install the dependency once with:
 
 ```r
 install.packages("httr2")
+install.packages("jsonlite")
 ```
 
 No packages are installed automatically by the scripts.
@@ -335,25 +336,13 @@ In particular:
 - API warnings result in `REVIEW` rather than `OK`;
 - structural variants require additional representation and validation;
 - the returned VCF representation may be equivalent to, but not necessarily identical to, the representation produced by the original variant caller in repetitive regions;
-- BED files must use the same genome assembly as the converted variants;
-- chromosome-name harmonization (`chr1` versus `1`, for example) does not perform genome-assembly conversion;
-- no liftover is performed.
+- BED files must use the same genome assembly as the converted variants.
 
 For diagnostic or research validation, the final genomic coordinates should therefore be checked against the corresponding VCF and, when appropriate, the original sequencing data.
 
 ## External service
 
 HGVS validation and genomic mapping are performed using the **VariantValidator REST API**.
-
-Service availability and authentication requirements are controlled by the external provider and may change.
-
-If an authorized token is required, it can be provided through:
-
-```bash
-export VV_TOKEN="your_token"
-```
-
-before running the workflow.
 
 ## Author
 
